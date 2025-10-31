@@ -161,9 +161,9 @@ export default function ProductosPage() {
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-3 gap-8 mb-8">
             <div>
-            <Link href="/" className="flex items-center">
-              <Image width={128} height={128} src="/timox-rgb.svg" alt="Timox" className="w-28" />
-            </Link>
+              <Link href="/" className="flex items-center">
+                <Image width={128} height={128} src="/timox-rgb.svg" alt="Timox" className="w-28" />
+              </Link>
               <p className="text-white/80 leading-relaxed">
                 Herramientas de precisión para profesionales de la industria.
               </p>
@@ -191,9 +191,25 @@ export default function ProductosPage() {
             <div>
               <h4 className="font-bold mb-4">Contacto</h4>
               <ul className="space-y-2 text-white/80">
-                <li>info@timox.com</li>
-                <li>+54 9 11 1234-5678</li>
-                <li>Buenos Aires, Argentina</li>
+                <li>Av Eliseo Canton 1870 Cordoba, Cordoba.</li>
+                <li>
+                  <a
+                    href="https://wa.me/5493515574449"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-white transition-colors"
+                  >
+                    (0351) 489 0900
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="mailto:hola@oechsle.com.ar?subject=Consulta desde el sitio web"
+                    className="hover:text-white transition-colors"
+                  >
+                    hola@oechsle.com.ar
+                  </a>
+                </li>
               </ul>
             </div>
           </div>
