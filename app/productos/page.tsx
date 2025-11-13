@@ -1,14 +1,105 @@
 "use client"
 import { useState, useMemo } from "react"
 import Link from "next/link"
+import { useSearchParams } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
-import { Search, Filter } from "lucide-react"
+import { Search, Filter, ArrowRight, ArrowLeft } from "lucide-react"
 import productosData from "@/data/productos-data"
 import Image from "next/image"
 
+const discosCategories = [
+  { name: "De corte para máquina sensitiva", image: "/imagenes/timox115x6.jpg", categoryId: "DISCOS DE CORTE PARA MÁQUINA SENSITIVA" },
+  { name: "De corte", image: "/imagenes/timox115x6.jpg", categoryId: "DISCOS DE CORTE PLANO" },
+  { name: "Desbaste", image: "/imagenes/timox115x6.jpg", categoryId: "DISCOS DE DESBASTE" },
+  { name: "Flap", image: "/imagenes/timox115x6.jpg", categoryId: "DISCOS FLAP" },
+  { name: "Diamantados", image: "/imagenes/timox115x6.jpg", categoryId: "DISCOS DIAMANTADOS" },
+]
+
+const cadenasCablesAccesoriosCategories = [
+  { name: "Cadenas de acero galvanizadas", image: "/imagenes/Cadena.png", categoryId: "CADENAS_ACERO_GALVANIZADAS" },
+  { name: "Cables de acero galvanizados", image: "/imagenes/Cables.png", categoryId: "CABLES_ACERO_GALVANIZADOS" },
+  { name: "Gancho de elevación de ojo con pestillo", image: "/imagenes/Gancho.png", categoryId: "GANCHO_ELEVACION_OJO_PESTILLO" },
+  { name: "Prensacables", image: "/imagenes/Carrousel-1.jpeg", categoryId: "PRENSACABLES" },
+  { name: "Tensores de ojo-gancho galvanizados", image: "/imagenes/Carrousel-1.jpeg", categoryId: "TENSORES_OJO_GANCHO" },
+]
+
+// Datos de las tablas por categoría
+const tablasData: Record<string, { headers: string[], rows: string[][] }> = {
+  "CADENAS_ACERO_GALVANIZADAS": {
+    headers: ["Código", "No", "Peso (Kg)", "U.V."],
+    rows: [
+      ["TXC20", "20", "12,50", "1"],
+      ["TXC30", "30", "12,50", "1"],
+      ["TXC35", "35", "12,50", "1"],
+      ["TXC40", "40", "12,50", "1"],
+      ["TXC45", "45", "12,50", "1"],
+      ["TXC50", "50", "12,50", "1"],
+      ["TXC60", "60", "25,00", "1"],
+      ["TXC70", "70", "25,00", "1"],
+      ["TXC80", "80", "25,00", "1"],
+      ["TXC90", "90", "25,00", "1"],
+      ["TXC100", "100", "25,00", "1"],
+      ["TXC110", "110", "25,00", "1"],
+    ]
+  },
+  "CABLES_ACERO_GALVANIZADOS": {
+    headers: ["Código", "Diámetro (mm)", "Construcción", "Longitud (Metros)", "U.V."],
+    rows: [
+      ["TXCG1.6", "1,6", "6x7", "100", "1"],
+      ["TXCG2", "2", "6x7", "100", "1"],
+      ["TXCG3", "3", "6x7", "100", "1"],
+      ["TXCG4", "4", "6x7", "100", "1"],
+      ["TXCG5", "5", "6x7", "100", "1"],
+      ["TXCG6", "6", "6x19", "100", "1"],
+      ["TXCG7", "7", "6x19", "100", "1"],
+      ["TXCG8", "8", "6x19", "100", "1"],
+      ["TXCG9", "9", "6x19", "100", "1"],
+      ["TXCG10", "10", "6x19", "100", "1"],
+      ["TXCG11", "11", "6x19", "100", "1"],
+      ["TXCG12", "12", "6x19", "100", "1"],
+    ]
+  },
+  "GANCHO_ELEVACION_OJO_PESTILLO": {
+    headers: ["Código", "Capacidad (Tn)", "U.V."],
+    rows: [
+      ["TXGEOR12", "1/2", "1"],
+      ["TXGEOR34", "3/4", "1"],
+      ["TXGEOR1", "1", "1"],
+      ["TXGEOR112", "1-1/2", "1"],
+    ]
+  },
+  "PRENSACABLES": {
+    headers: ["Código", "Medida (mm)", "U.V."],
+    rows: [
+      ["TXP3", "3", "1"],
+      ["TXP5", "5", "1"],
+      ["TXP6", "6", "1"],
+      ["TXP8", "8", "1"],
+      ["TXP10", "10", "1"],
+      ["TXP13", "13", "1"],
+      ["TXP14", "14", "1"],
+      ["TXP16", "16", "1"],
+      ["TXP19", "19", "1"],
+      ["TXP22", "22", "1"],
+      ["TXP26", "26", "1"],
+    ]
+  },
+  "TENSORES_OJO_GANCHO": {
+    headers: ["Código", "Medida (mm)", "U.V."],
+    rows: [
+      ["TXTOG6", "6", "1"],
+      ["TXTOG8", "8", "1"],
+      ["TXTOG10", "10", "1"],
+    ]
+  },
+}
+
 export default function ProductosPage() {
+  const searchParams = useSearchParams()
+  const typeParam = searchParams.get("type")
+  const categoryParam = searchParams.get("category")
   const [searchQuery, setSearchQuery] = useState("")
   const [selectedCategory, setSelectedCategory] = useState<string>("all")
   const categories = useMemo(() => {
@@ -16,15 +107,16 @@ export default function ProductosPage() {
     return ["all", ...cats]
   }, [])
   const filteredProducts = useMemo(() => {
+    const categoryFilter = categoryParam || (selectedCategory === "all" ? null : selectedCategory)
     return productosData.filter((producto) => {
       const matchesSearch =
         producto.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
         producto.descripcion.toLowerCase().includes(searchQuery.toLowerCase()) ||
         producto.category.toLowerCase().includes(searchQuery.toLowerCase())
-      const matchesCategory = selectedCategory === "all" || producto.category === selectedCategory
+      const matchesCategory = !categoryFilter || producto.category === categoryFilter
       return matchesSearch && matchesCategory
     })
-  }, [searchQuery, selectedCategory])
+  }, [searchQuery, selectedCategory, categoryParam])
 
   return (
     <div className="min-h-screen bg-background">
@@ -32,7 +124,7 @@ export default function ProductosPage() {
       <header className="border-b border-border bg-white sticky top-0 z-50">
         <div className="container mx-auto px-4 flex items-center justify-between">
           <Link href="/" className="flex items-center">
-            <Image width={128} height={128} src="/timox-rgb.svg" alt="Timox" className="w-36" />
+            <Image width={128} height={128} src="/timox-rgb.svg" alt="Timox" className="w-40" />
           </Link>
           <nav className="hidden md:flex items-center gap-8">
             <Link
@@ -56,7 +148,7 @@ export default function ProductosPage() {
               rel="noopener noreferrer"
               className="bg-[#2C3E50] text-white px-6 py-2 rounded-full font-medium hover:bg-[#3A506B] transition-colors"
             >
-              Cliente
+              Clientes
             </Link>
           </nav>
         </div>
@@ -64,56 +156,177 @@ export default function ProductosPage() {
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-[#2C3E50] to-[#3A506B] text-white py-16">
         <div className="container mx-auto px-4">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-balance">Nuestros Productos</h1>
-          <p className="text-lg text-white/90 max-w-2xl leading-relaxed">
-            Catálogo completo de discos de corte y desbaste para todas tus necesidades industriales
-          </p>
+          <div className="flex items-center gap-4 mb-4">
+            {categoryParam && (
+              <Link href={categoryParam.startsWith("DISCOS") ? "/productos?type=discos" : "/productos?type=cadenas-cables-accesorios"}>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="border-white/50 text-white bg-white/10 hover:bg-white/20 hover:border-white cursor-pointer"
+                >
+                  <ArrowLeft className="h-4 w-4 mr-2" />
+                  Volver
+                </Button>
+              </Link>
+            )}
+            <h1 className="text-4xl md:text-5xl font-bold text-balance">
+              {categoryParam
+                ? discosCategories.find(c => c.categoryId === categoryParam)?.name || 
+                  cadenasCablesAccesoriosCategories.find(c => c.categoryId === categoryParam)?.name || 
+                  categoryParam
+                : typeParam === "discos"
+                  ? "Discos"
+                  : typeParam === "cadenas-cables-accesorios"
+                    ? "Cadenas, Cables y Accesorios"
+                    : "Nuestros Productos"}
+            </h1>
+          </div>
+            <p className="text-lg text-white/90 max-w-2xl leading-relaxed">
+              {categoryParam
+                ? `Productos de ${discosCategories.find(c => c.categoryId === categoryParam)?.name || 
+                    cadenasCablesAccesoriosCategories.find(c => c.categoryId === categoryParam)?.name || 
+                    categoryParam}`
+                : typeParam === "discos"
+                  ? "Selecciona una categoría para ver los productos"
+                  : typeParam === "cadenas-cables-accesorios"
+                    ? "Selecciona una categoría para ver los productos"
+                    : "Catálogo completo de discos de corte y desbaste para todas tus necesidades industriales"}
+            </p>
         </div>
       </section>
       {/* Filters and Search */}
-      <section className="py-8 bg-muted/30 border-b">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row gap-4 items-start md:items-center justify-between">
-            {/* Search Bar */}
-            <div className="relative w-full md:w-96">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
-              <Input
-                type="text"
-                placeholder="Buscar productos..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-10 h-11"
-              />
+      {!typeParam && !categoryParam && (
+        <section className="py-8 bg-muted/30 border-b">
+          <div className="container mx-auto px-4">
+            <div className="flex flex-col md:flex-row gap-4 items-start md:items-center justify-between">
+              {/* Search Bar */}
+              <div className="relative w-full md:w-96">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+                <Input
+                  type="text"
+                  placeholder="Buscar productos..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="pl-10 h-11"
+                />
+              </div>
+              {/* Category Filters */}
+              <div className="flex items-center gap-2 flex-wrap">
+                <Filter className="h-5 w-5 text-muted-foreground" />
+                {categories.map((category) => (
+                  <Button
+                    key={category}
+                    variant={selectedCategory === category ? "default" : "outline"}
+                    size="sm"
+                    onClick={() => setSelectedCategory(category)}
+                    className={selectedCategory === category ? "bg-[#2C3E50] hover:bg-[#3A506B]" : ""}
+                  >
+                    {category === "all" ? "Todos" : category}
+                  </Button>
+                ))}
+              </div>
             </div>
-            {/* Category Filters */}
-            <div className="flex items-center gap-2 flex-wrap">
-              <Filter className="h-5 w-5 text-muted-foreground" />
-              {categories.map((category) => (
-                <Button
-                  key={category}
-                  variant={selectedCategory === category ? "default" : "outline"}
-                  size="sm"
-                  onClick={() => setSelectedCategory(category)}
-                  className={selectedCategory === category ? "bg-[#2C3E50] hover:bg-[#3A506B]" : ""}
-                >
-                  {category === "all" ? "Todos" : category}
-                </Button>
-              ))}
+            {/* Results Count */}
+            <div className="mt-4">
+              <p className="text-sm text-muted-foreground">
+                Mostrando <span className="font-semibold text-foreground">{filteredProducts.length}</span> de{" "}
+                <span className="font-semibold text-foreground">{productosData.length}</span> productos
+              </p>
             </div>
           </div>
-          {/* Results Count */}
-          <div className="mt-4">
-            <p className="text-sm text-muted-foreground">
-              Mostrando <span className="font-semibold text-foreground">{filteredProducts.length}</span> de{" "}
-              <span className="font-semibold text-foreground">{productosData.length}</span> productos
-            </p>
-          </div>
-        </div>
-      </section>
+        </section>
+      )}
       {/* Products Grid */}
       <section className="py-12">
         <div className="container mx-auto px-4">
-          {filteredProducts.length > 0 ? (
+          {typeParam === "discos" ? (
+            <div className="grid gap-6 grid-cols-1 md:grid-cols-3 max-w-5xl mx-auto">
+              {discosCategories.map((categoria, index) => (
+                <Card key={index} className="group overflow-hidden rounded-xl border border-border bg-white shadow-sm transition-all hover:shadow-lg">
+                  <div className="relative aspect-4/3">
+                    <Image
+                      src={categoria.image}
+                      alt={categoria.name}
+                      fill
+                      className="object-contain opacity-100 group-hover:opacity-0 transition-opacity duration-500 ease-in-out"
+                    />
+                    <div className="absolute inset-0 flex items-center justify-center p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out">
+                      <ul className="text-sm text-muted-foreground leading-relaxed space-y-1 text-center">
+                        <li>• {categoria.name}</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <CardContent className="flex flex-col gap-3 p-6">
+                    <h3 className="text-base font-semibold text-foreground text-center">{categoria.name}</h3>
+                    <Link href={`/productos?category=${encodeURIComponent(categoria.categoryId)}`} className="w-full mt-auto">
+                      <Button variant="outline" className="w-full border-[#2C3E50] text-[#2C3E50] hover:bg-[#2C3E50] hover:text-white font-medium transition-all cursor-pointer">
+                        Ver más
+                        <ArrowRight className="ml-2 h-4 w-4" />
+                      </Button>
+                    </Link>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          ) : typeParam === "cadenas-cables-accesorios" ? (
+            <div className="grid gap-6 grid-cols-1 md:grid-cols-3 max-w-5xl mx-auto">
+              {cadenasCablesAccesoriosCategories.map((categoria, index) => (
+                <Card key={index} className="group overflow-hidden rounded-xl border border-border bg-white shadow-sm transition-all hover:shadow-lg">
+                  <div className="relative aspect-4/3">
+                    <Image
+                      src={categoria.image}
+                      alt={categoria.name}
+                      fill
+                      className="object-contain opacity-100 group-hover:opacity-0 transition-opacity duration-500 ease-in-out"
+                    />
+                    <div className="absolute inset-0 flex items-center justify-center p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out">
+                      <ul className="text-sm text-muted-foreground leading-relaxed space-y-1 text-center">
+                        <li>• {categoria.name}</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <CardContent className="flex flex-col gap-3 p-6">
+                    <h3 className="text-base font-semibold text-foreground text-center">{categoria.name}</h3>
+                    <Link href={`/productos?category=${encodeURIComponent(categoria.categoryId)}`} className="w-full mt-auto">
+                      <Button variant="outline" className="w-full border-[#2C3E50] text-[#2C3E50] hover:bg-[#2C3E50] hover:text-white font-medium transition-all cursor-pointer">
+                        Ver más
+                        <ArrowRight className="ml-2 h-4 w-4" />
+                      </Button>
+                    </Link>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          ) : categoryParam && tablasData[categoryParam] ? (
+            <div className="max-w-6xl mx-auto">
+              <div className="bg-white rounded-xl border border-border shadow-sm overflow-hidden">
+                <div className="overflow-x-auto">
+                  <table className="w-full">
+                    <thead className="bg-[#2C3E50] text-white">
+                      <tr>
+                        {tablasData[categoryParam].headers.map((header, index) => (
+                          <th key={index} className="px-6 py-4 text-left font-semibold text-sm uppercase tracking-wide">
+                            {header}
+                          </th>
+                        ))}
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-gray-200">
+                      {tablasData[categoryParam].rows.map((row, rowIndex) => (
+                        <tr key={rowIndex} className="hover:bg-[#ECEEEF]/50 transition-colors">
+                          {row.map((cell, cellIndex) => (
+                            <td key={cellIndex} className="px-6 py-4 text-sm text-[#1B1F23]">
+                              {cell}
+                            </td>
+                          ))}
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          ) : filteredProducts.length > 0 ? (
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
               {filteredProducts.map((producto) => (
                 <Card

@@ -13,7 +13,7 @@ export default function HomePage() {
       <header className="border-b border-border bg-white sticky top-0 z-50">
         <div className="container mx-auto px-4 flex items-center justify-between">
           <Link href="/" className="flex items-center">
-            <Image width={128} height={128} src="/timox-rgb.svg" alt="Timox" className="w-36" />
+            <Image width={128} height={128} src="/timox-rgb.svg" alt="Timox" className="w-40" />
           </Link>
           <nav className="hidden md:flex items-center gap-8">
             <Link href="#empresa" className="text-foreground hover:text-[#3A506B] transition-colors font-medium">
@@ -37,7 +37,7 @@ export default function HomePage() {
               rel="noopener noreferrer"
               className="bg-[#2C3E50] text-white px-6 py-2 rounded-full font-medium hover:bg-[#3A506B] transition-colors"
             >
-              Cliente
+              Clientes
             </Link>
           </nav>
         </div>
@@ -56,14 +56,14 @@ export default function HomePage() {
         <div className="absolute inset-0 bg-black/40"></div>
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-5xl">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 text-balance">
+            <h1 className="text-4xl md:text-5xl font-bold mb-6 text-balance">
               RENDIMIENTO PROFESIONAL EN CADA HERRAMIENTA
             </h1>
             <p className="text-lg md:text-2xl mb-8 text-white/90 leading-relaxed">
               Discos, cables y accesorios <br /> diseñados para la industria.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <Link href="/productos">
+              <Link target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1i8YEr-lR49kibk7Ge2TRhnIllMOBjSYe/view?usp=drive_link">
                 <Button
                   size="lg"
                   className="bg-white text-[#2C3E50] hover:bg-gray-100 hover:text-[#3A506B] transition-all duration-200 w-full sm:w-auto shadow-lg hover:shadow-xl cursor-pointer"
@@ -94,7 +94,7 @@ export default function HomePage() {
               Discos, cadenas, cables y accesorios diseñados para un rendimiento profesional.
             </p>
           </div>
-          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+          <div className="grid gap-6 md:grid-cols-2 max-w-3xl mx-auto">
             {/* Discos */}
             <Card className="group overflow-hidden rounded-xl border border-border bg-white shadow-sm transition-all hover:shadow-lg">
               <div className="relative aspect-4/3">
@@ -102,20 +102,22 @@ export default function HomePage() {
                   src="/imagenes/timox115x6.jpg"
                   alt="Discos"
                   fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  className="object-contain opacity-100 group-hover:opacity-0 transition-opacity duration-500 ease-in-out"
                 />
+                <div className="absolute inset-0 flex items-center justify-center p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out">
+                  <ul className="text-sm text-muted-foreground leading-relaxed space-y-1">
+                    <li>• De corte para máquina sensitiva</li>
+                    <li>• De corte</li>
+                    <li>• Desbaste</li>
+                    <li>• Flap</li>
+                    <li>• Diamantados</li>
+                  </ul>
+                </div>
               </div>
               <CardContent className="flex flex-col gap-3 p-6">
                 <h3 className="text-lg font-semibold text-foreground">Discos</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  De corte para máquina sensitiva
-                  <br />De corte
-                  <br />Desbaste
-                  <br />Flap
-                  <br />Diamantados
-                </p>
                 <Link
-                  href="/productos?category=Desbaste (Centro Deprimido)"
+                  href="/productos?type=discos"
                   className="mt-auto inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-[#2C3E50] hover:text-[#3A506B]"
                 >
                   Ver más
@@ -123,70 +125,29 @@ export default function HomePage() {
                 </Link>
               </CardContent>
             </Card>
-            {/* Cadenas */}
+            {/* Cadenas, Cables y Accesorios */}
             <Card className="group overflow-hidden rounded-xl border border-border bg-white shadow-sm transition-all hover:shadow-lg">
-              <div className="relative aspect-4/3 bg-linear-to-br from-gray-900 via-gray-800 to-gray-900 flex items-center justify-center">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-20 w-20 text-white/55" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
-                </svg>
+              <div className="relative aspect-4/3">
+                <Image
+                  src="/imagenes/Carrousel-1.jpeg"
+                  alt="Cadenas, Cables y Accesorios"
+                  fill
+                  className="object-cover opacity-100 group-hover:opacity-0 transition-opacity duration-500 ease-in-out"
+                />
+                <div className="absolute inset-0 flex items-center justify-center p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out">
+                  <ul className="text-sm text-muted-foreground leading-relaxed space-y-1">
+                    <li>• Cadenas de acero galvanizadas</li>
+                    <li>• Cables de acero galvanizados</li>
+                    <li>• Gancho de elevación de ojo con pestillo</li>
+                    <li>• Prensacables</li>
+                    <li>• Tensores de ojo-gancho galvanizados</li>
+                  </ul>
+                </div>
               </div>
               <CardContent className="flex flex-col gap-3 p-6">
-                <h3 className="text-lg font-semibold text-foreground">Cadenas</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  Cadenas de acero galvanizadas
-                </p>
+                <h3 className="text-lg font-semibold text-foreground">Cadenas, Cables y Accesorios</h3>
                 <Link
-                  href="/productos"
-                  className="mt-auto inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-[#2C3E50] hover:text-[#3A506B]"
-                >
-                  Ver más
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
-              </CardContent>
-            </Card>
-            {/* Cables */}
-            <Card className="group overflow-hidden rounded-xl border border-border bg-white shadow-sm transition-all hover:shadow-lg">
-              <div className="relative aspect-4/3 bg-linear-to-br from-slate-800 via-slate-700 to-slate-900 flex items-center justify-center">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-20 w-20 text-white/55" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                </svg>
-              </div>
-              <CardContent className="flex flex-col gap-3 p-6">
-                <h3 className="text-lg font-semibold text-foreground">Cables</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  Cables de acero galvanizados
-                </p>
-                <Link
-                  href="/productos"
-                  className="mt-auto inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-[#2C3E50] hover:text-[#3A506B]"
-                >
-                  Ver más
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
-              </CardContent>
-            </Card>
-            {/* Accesorios */}
-            <Card className="group overflow-hidden rounded-xl border border-border bg-white shadow-sm transition-all hover:shadow-lg">
-              <div className="relative aspect-4/3 bg-linear-to-br from-zinc-800 via-zinc-700 to-zinc-900 flex items-center justify-center">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-20 w-20 text-white/55" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={1.5}
-                    d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
-                  />
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                </svg>
-              </div>
-              <CardContent className="flex flex-col gap-3 p-6">
-                <h3 className="text-lg font-semibold text-foreground">Accesorios</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  Gancho de elevación de ojo con pestillo
-                  <br />Prensacables
-                  <br />Tensores de ojo-gancho galvanizados
-                </p>
-                <Link
-                  href="/productos"
+                  href="/productos?type=cadenas-cables-accesorios"
                   className="mt-auto inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-[#2C3E50] hover:text-[#3A506B]"
                 >
                   Ver más
@@ -198,15 +159,18 @@ export default function HomePage() {
         </div>
       </section>
       {/* Sobre Timox Section */}
-      <section id="empresa" className="py-16 bg-white max-w-6xl mx-auto">
+      <section id="empresa" className="py-24 bg-white max-w-6xl mx-auto">
         <div className="container mx-auto px-4 grid md:grid-cols-2 gap-10 items-center">
           {/* Columna Izquierda - Texto */}
           <div>
             <h2 className="text-3xl md:text-4xl font-bold mb-6 text-[#2C3E50]">Sobre Timox</h2>
-            <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
-              Nacida del espíritu emprendedor del Grupo Oechsle, Timox representa evolución, conocimiento y calidad.
+            <p className="text-lg text-muted-foreground leading-relaxed">
+              Con más de seis décadas de trayectoria industrial, transformamos la experiencia en distribución y servicio técnico en productos que ofrecen rendimiento profesional, durabilidad y confianza. Cada herramienta refleja nuestro compromiso con la innovación y la mejora continua, diseñada para resistir el uso intensivo y optimizar procesos productivos en los entornos más exigentes.
             </p>
-            <h3 className="text-2xl font-semibold mb-4 text-[#2C3E50]">Nuestros valores</h3>
+          </div>
+          {/* Columna Derecha - Valores */}
+          <div>
+            <h3 className="text-2xl font-semibold mb-6 text-[#2C3E50]">Nuestros valores</h3>
             <div className="space-y-6">
               {/* Valor 1 */}
               <div>
@@ -234,25 +198,6 @@ export default function HomePage() {
                 <p className="text-muted-foreground text-sm ml-7">
                   Abrimos relaciones duraderas en marca
                 </p>
-              </div>
-            </div>
-          </div>
-          {/* Columna Derecha - Imagen */}
-          <div className="flex flex-col items-center">
-            <div className="w-full max-w-sm rounded-xl overflow-hidden shadow-md bg-muted mb-8">
-              <img
-                src="https://images.unsplash.com/photo-1621905251918-2668a37f0b44?q=80&w=800"
-                alt="Trabajador con taladro Timox"
-                className="w-full h-full object-cover"
-              />
-            </div>
-            {/* Línea del tiempo debajo de la imagen */}
-            <div className="text-center">
-              <h3 className="text-2xl font-semibold mb-4 text-[#2C3E50]">Evolución de la marca</h3>
-              <div className="space-y-3 text-muted-foreground text-sm">
-                <p><span className="font-semibold text-foreground">1959</span> — Oechsle</p>
-                <p><span className="font-semibold text-foreground">2020s</span> — Marcas propias</p>
-                <p><span className="font-semibold text-foreground">2025</span> — Expansión de Timox</p>
               </div>
             </div>
           </div>
