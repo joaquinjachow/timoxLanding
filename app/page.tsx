@@ -129,7 +129,7 @@ export default function HomePage() {
             <Card className="group overflow-hidden rounded-xl border border-border bg-white shadow-sm transition-all hover:shadow-lg">
               <div className="relative aspect-4/3">
                 <Image
-                  src="/imagenes/Carrousel-1.jpeg"
+                  src="/imagenes/Gancho.png"
                   alt="Cadenas, Cables y Accesorios"
                   fill
                   className="object-cover opacity-100 group-hover:opacity-0 transition-opacity duration-500 ease-in-out"

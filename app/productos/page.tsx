@@ -10,7 +10,7 @@ import productosData from "@/data/productos-data"
 import Image from "next/image"
 
 const discosCategories = [
-  { name: "De corte para máquina sensitiva", image: "/imagenes/timox115x6.jpg", categoryId: "DISCOS DE CORTE PARA MÁQUINA SENSITIVA" },
+  { name: "Para máquina sensitiva", image: "/imagenes/timox115x6.jpg", categoryId: "DISCOS DE CORTE PARA MÁQUINA SENSITIVA" },
   { name: "De corte", image: "/imagenes/timox115x6.jpg", categoryId: "DISCOS DE CORTE PLANO" },
   { name: "Desbaste", image: "/imagenes/timox115x6.jpg", categoryId: "DISCOS DE DESBASTE" },
   { name: "Flap", image: "/imagenes/timox115x6.jpg", categoryId: "DISCOS FLAP" },
@@ -25,7 +25,6 @@ const cadenasCablesAccesoriosCategories = [
   { name: "Tensores de ojo-gancho galvanizados", image: "/imagenes/Carrousel-1.jpeg", categoryId: "TENSORES_OJO_GANCHO" },
 ]
 
-// Datos de las tablas por categoría
 const tablasData: Record<string, { headers: string[], rows: string[][] }> = {
   "CADENAS_ACERO_GALVANIZADAS": {
     headers: ["Código", "No", "Peso (Kg)", "U.V."],
@@ -158,7 +157,7 @@ export default function ProductosPage() {
         <div className="container mx-auto px-4">
           <div className="flex items-center gap-4 mb-4">
             {categoryParam && (
-              <Link href={categoryParam.startsWith("DISCOS") ? "/productos?type=discos" : "/productos?type=cadenas-cables-accesorios"}>
+              <Link href="/productos">
                 <Button
                   variant="outline"
                   size="sm"
@@ -190,12 +189,12 @@ export default function ProductosPage() {
                   ? "Selecciona una categoría para ver los productos"
                   : typeParam === "cadenas-cables-accesorios"
                     ? "Selecciona una categoría para ver los productos"
-                    : "Catálogo completo de discos de corte y desbaste para todas tus necesidades industriales"}
+                    : "Explora nuestra línea completa de productos. Selecciona una categoría para ver más detalles"}
             </p>
         </div>
       </section>
-      {/* Filters and Search */}
-      {!typeParam && !categoryParam && (
+      {/* Filters and Search - Solo se muestra cuando hay productos individuales, no cuando hay cards */}
+      {false && !typeParam && !categoryParam ? (
         <section className="py-8 bg-muted/30 border-b">
           <div className="container mx-auto px-4">
             <div className="flex flex-col md:flex-row gap-4 items-start md:items-center justify-between">
@@ -235,7 +234,7 @@ export default function ProductosPage() {
             </div>
           </div>
         </section>
-      )}
+      ) : null}
       {/* Products Grid */}
       <section className="py-12">
         <div className="container mx-auto px-4">
@@ -296,6 +295,73 @@ export default function ProductosPage() {
                   </CardContent>
                 </Card>
               ))}
+            </div>
+          ) : !typeParam && !categoryParam ? (
+            <div className="space-y-12">
+              {/* Sección de Discos */}
+              <div>
+                <h2 className="text-2xl md:text-3xl font-bold mb-6 text-foreground text-center">Discos</h2>
+                <div className="grid gap-6 grid-cols-1 md:grid-cols-3 lg:grid-cols-5 max-w-7xl mx-auto">
+                  {discosCategories.map((categoria, index) => (
+                    <Card key={index} className="group overflow-hidden rounded-xl border border-border bg-white shadow-sm transition-all hover:shadow-lg">
+                      <div className="relative aspect-4/3">
+                        <Image
+                          src={categoria.image}
+                          alt={categoria.name}
+                          fill
+                          className="object-contain opacity-100 group-hover:opacity-0 transition-opacity duration-500 ease-in-out"
+                        />
+                        <div className="absolute inset-0 flex items-center justify-center p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out">
+                          <ul className="text-sm text-muted-foreground leading-relaxed space-y-1 text-center">
+                            <li>• {categoria.name}</li>
+                          </ul>
+                        </div>
+                      </div>
+                      <CardContent className="flex flex-col gap-3 p-6">
+                        <h3 className="text-base font-semibold text-foreground text-center">{categoria.name}</h3>
+                        <Link href={`/productos?category=${encodeURIComponent(categoria.categoryId)}`} className="w-full mt-auto">
+                          <Button variant="outline" className="w-full border-[#2C3E50] text-[#2C3E50] hover:bg-[#2C3E50] hover:text-white font-medium transition-all cursor-pointer">
+                            Ver más
+                            <ArrowRight className="ml-2 h-4 w-4" />
+                          </Button>
+                        </Link>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              </div>
+              {/* Sección de Cadenas, Cables y Accesorios */}
+              <div>
+                <h2 className="text-2xl md:text-3xl font-bold mb-6 text-foreground text-center">Cadenas, Cables y Accesorios</h2>
+                <div className="grid gap-6 grid-cols-1 md:grid-cols-3 lg:grid-cols-5 max-w-7xl mx-auto">
+                  {cadenasCablesAccesoriosCategories.map((categoria, index) => (
+                    <Card key={index} className="group overflow-hidden rounded-xl border border-border bg-white shadow-sm transition-all hover:shadow-lg">
+                      <div className="relative aspect-4/3">
+                        <Image
+                          src={categoria.image}
+                          alt={categoria.name}
+                          fill
+                          className="object-contain opacity-100 group-hover:opacity-0 transition-opacity duration-500 ease-in-out"
+                        />
+                        <div className="absolute inset-0 flex items-center justify-center p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out">
+                          <ul className="text-sm text-muted-foreground leading-relaxed space-y-1 text-center">
+                            <li>• {categoria.name}</li>
+                          </ul>
+                        </div>
+                      </div>
+                      <CardContent className="flex flex-col gap-3 p-6">
+                        <h3 className="text-base font-semibold text-foreground text-center">{categoria.name}</h3>
+                        <Link href={`/productos?category=${encodeURIComponent(categoria.categoryId)}`} className="w-full mt-auto">
+                          <Button variant="outline" className="w-full border-[#2C3E50] text-[#2C3E50] hover:bg-[#2C3E50] hover:text-white font-medium transition-all cursor-pointer">
+                            Ver más
+                            <ArrowRight className="ml-2 h-4 w-4" />
+                          </Button>
+                        </Link>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              </div>
             </div>
           ) : categoryParam && tablasData[categoryParam] ? (
             <div className="max-w-6xl mx-auto">
@@ -444,7 +510,7 @@ export default function ProductosPage() {
         href="https://wa.me/5493515574449"
         target="_blank"
         rel="noopener noreferrer"
-        className="fixed bottom-6 right-6 z-50 bg-[#25D366] hover:bg-[#20BA5A] text-white rounded-full p-4 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center w-16 h-16 animate-pulse hover:animate-none"
+        className="fixed bottom-6 right-6 z-50 bg-[#25D366] hover:bg-[#20BA5A] text-white rounded-full p-4 shadow-lg hover:shadow-xl flex items-center justify-center w-16 h-16 cursor-pointer"
         aria-label="Contactar por WhatsApp"
       >
         <svg
