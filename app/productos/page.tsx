@@ -10,19 +10,19 @@ import productosData from "@/data/productos-data"
 import Image from "next/image"
 
 const discosCategories = [
-  { name: "Para máquina sensitiva", image: "/imagenes/timox115x6.jpg", categoryId: "DISCOS DE CORTE PARA MÁQUINA SENSITIVA" },
-  { name: "De corte", image: "/imagenes/timox115x6.jpg", categoryId: "DISCOS DE CORTE PLANO" },
-  { name: "Desbaste", image: "/imagenes/timox115x6.jpg", categoryId: "DISCOS DE DESBASTE" },
-  { name: "Flap", image: "/imagenes/timox115x6.jpg", categoryId: "DISCOS FLAP" },
-  { name: "Diamantados", image: "/imagenes/timox115x6.jpg", categoryId: "DISCOS DIAMANTADOS" },
+  { name: "Para máquina sensitiva", image: "/imagenes/DiscosCard.png", categoryId: "DISCOS DE CORTE PARA MÁQUINA SENSITIVA" },
+  { name: "De corte", image: "/imagenes/DiscosCard.png", categoryId: "DISCOS DE CORTE PLANO" },
+  { name: "Desbaste", image: "/imagenes/DiscosCard.png", categoryId: "DISCOS DE DESBASTE" },
+  { name: "Flap", image: "/imagenes/DiscosCard.png", categoryId: "DISCOS FLAP" },
+  { name: "Diamantados", image: "/imagenes/DiscosCard.png", categoryId: "DISCOS DIAMANTADOS" },
 ]
 
 const cadenasCablesAccesoriosCategories = [
   { name: "Cadenas de acero galvanizadas", image: "/imagenes/Cadena.png", categoryId: "CADENAS_ACERO_GALVANIZADAS" },
   { name: "Cables de acero galvanizados", image: "/imagenes/Cables.png", categoryId: "CABLES_ACERO_GALVANIZADOS" },
   { name: "Gancho de elevación de ojo con pestillo", image: "/imagenes/Gancho.png", categoryId: "GANCHO_ELEVACION_OJO_PESTILLO" },
-  { name: "Prensacables", image: "/imagenes/Carrousel-1.jpeg", categoryId: "PRENSACABLES" },
-  { name: "Tensores de ojo-gancho galvanizados", image: "/imagenes/Carrousel-1.jpeg", categoryId: "TENSORES_OJO_GANCHO" },
+  { name: "Prensacables", image: "/imagenes/prensacables.png", categoryId: "PRENSACABLES" },
+  { name: "Tensores de ojo-gancho galvanizados", image: "/imagenes/tensor.png", categoryId: "TENSORES_OJO_GANCHO" },
 ]
 
 const tablasData: Record<string, { headers: string[], rows: string[][] }> = {
@@ -404,7 +404,7 @@ export default function ProductosPage() {
                       <img
                         src={producto.image || "/placeholder.svg"}
                         alt={producto.name}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform"
+                        className="w-full h-full object-contain group-hover:scale-105 transition-transform"
                       />
                     </div>
                     <div className="p-2">
@@ -443,8 +443,21 @@ export default function ProductosPage() {
           )}
         </div>
       </section>
+      {/* Botón de venta */}
+      <section className="py-12 bg-[#ECEEEF]">
+        <div className="container mx-auto px-4 text-center">
+          <Link href="/#contacto">
+            <Button
+              size="lg"
+              className="bg-[#2C3E50] cursor-pointer hover:bg-[#3A506B] text-white px-8 py-6 text-lg font-semibold rounded-md transition-all duration-200 shadow-lg hover:shadow-xl"
+            >
+              ¡Quiero vender estos productos!
+            </Button>
+          </Link>
+        </div>
+      </section>
       {/* Footer */}
-      <footer className="bg-[#2C3E50] text-white py-12 mt-12">
+      <footer className="bg-[#2C3E50] text-white py-12">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-3 gap-8 mb-8">
             <div>

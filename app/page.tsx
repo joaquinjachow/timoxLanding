@@ -99,10 +99,10 @@ export default function HomePage() {
             <Card className="group overflow-hidden rounded-xl border border-border bg-white shadow-sm transition-all hover:shadow-lg">
               <div className="relative aspect-4/3">
                 <Image
-                  src="/imagenes/timox115x6.jpg"
+                  src="/imagenes/TIMOX-card.png"
                   alt="Discos"
                   fill
-                  className="object-contain opacity-100 group-hover:opacity-0 transition-opacity duration-500 ease-in-out"
+                  className="object-cover opacity-100 group-hover:opacity-0 transition-opacity duration-500 ease-in-out"
                 />
                 <div className="absolute inset-0 flex items-center justify-center p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out">
                   <ul className="text-sm text-muted-foreground leading-relaxed space-y-1">
@@ -129,7 +129,7 @@ export default function HomePage() {
             <Card className="group overflow-hidden rounded-xl border border-border bg-white shadow-sm transition-all hover:shadow-lg">
               <div className="relative aspect-4/3">
                 <Image
-                  src="/imagenes/Gancho.png"
+                  src="/imagenes/CadenaCard.png"
                   alt="Cadenas, Cables y Accesorios"
                   fill
                   className="object-cover opacity-100 group-hover:opacity-0 transition-opacity duration-500 ease-in-out"
@@ -155,6 +155,17 @@ export default function HomePage() {
                 </Link>
               </CardContent>
             </Card>
+          </div>
+          {/* Botón de venta */}
+          <div className="mt-12 text-center">
+            <Link href="#contacto">
+              <Button
+                size="lg"
+                className="bg-[#2C3E50] hover:bg-[#3A506B] cursor-pointer text-white px-8 py-6 text-lg font-semibold rounded-md transition-all duration-200 shadow-lg hover:shadow-xl"
+              >
+                ¡Quiero vender estos productos!
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
