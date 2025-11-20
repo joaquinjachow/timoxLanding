@@ -57,10 +57,10 @@ export default function HomePage() {
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-5xl">
             <h1 className="text-4xl md:text-5xl font-bold mb-6 text-balance">
-              RENDIMIENTO PROFESIONAL EN CADA HERRAMIENTA
+              RENDIMIENTO PROFESIONAL EN CORTE Y SUJECIÓN
             </h1>
             <p className="text-lg md:text-2xl mb-8 text-white/90 leading-relaxed">
-              Discos, cables y accesorios <br /> diseñados para la industria.
+              Discos, cables y accesorios <br /> para ferreterías, talleres e industria.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Link target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1i8YEr-lR49kibk7Ge2TRhnIllMOBjSYe/view?usp=drive_link">
@@ -155,17 +155,6 @@ export default function HomePage() {
                 </Link>
               </CardContent>
             </Card>
-          </div>
-          {/* Botón de venta */}
-          <div className="mt-12 text-center">
-            <Link href="#contacto">
-              <Button
-                size="lg"
-                className="bg-[#2C3E50] hover:bg-[#3A506B] cursor-pointer text-white px-8 py-6 text-lg font-semibold rounded-md transition-all duration-200 shadow-lg hover:shadow-xl"
-              >
-                ¡Quiero vender estos productos!
-              </Button>
-            </Link>
           </div>
         </div>
       </section>
@@ -423,6 +412,16 @@ export default function HomePage() {
           </div>
         </div>
       </footer>
+      {/* Botón fijo "Quiero vender estos productos" */}
+      <Link
+        href="#contacto"
+        className="fixed bottom-6 left-6 z-50 bg-[#2C3E50] hover:bg-[#3A506B] text-white rounded-full px-6 py-4 shadow-lg hover:shadow-xl flex items-center gap-2 cursor-pointer transition-all duration-200 font-semibold text-sm md:text-base"
+        aria-label="Quiero vender estos productos"
+      >
+        <Handshake className="w-5 h-5 md:w-6 md:h-6" />
+        <span className="hidden sm:inline">¡Quiero vender estos productos!</span>
+        <span className="sm:hidden">Vender</span>
+      </Link>
       {/* WhatsApp Floating Button */}
       <a
         href="https://wa.me/5493515574449"

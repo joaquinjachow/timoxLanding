@@ -5,7 +5,7 @@ import { useSearchParams } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
-import { Search, Filter, ArrowRight, ArrowLeft } from "lucide-react"
+import { Search, Filter, ArrowRight, ArrowLeft, Handshake } from "lucide-react"
 import productosData from "@/data/productos-data"
 import Image from "next/image"
 
@@ -25,7 +25,51 @@ const cadenasCablesAccesoriosCategories = [
   { name: "Tensores de ojo-gancho galvanizados", image: "/imagenes/tensor.png", categoryId: "TENSORES_OJO_GANCHO" },
 ]
 
-const tablasData: Record<string, { headers: string[], rows: string[][] }> = {
+const tablasData: Record<string, { headers: string[], rows: string[][], unidadesPorCaja?: string }> = {
+  "DISCOS DE CORTE PARA MÁQUINA SENSITIVA": {
+    headers: ["Código", "Medidas", "U.V."],
+    rows: [
+      ["TXCF3553.0", "355,0 x 3,0 x 25,4", "1"],
+      ["TXCF4053.0", "405,0 x 3,0 x 25,4", "1"],
+    ],
+    unidadesPorCaja: "25"
+  },
+  "DISCOS DE CORTE PLANO": {
+    headers: ["Código", "Medidas", "U.V.", "Unidades por caja"],
+    rows: [
+      ["TXCP1151.0", "115,0 X 1,0 X 22,23", "1", "50"],
+      ["TXCP1151.6", "115,0 x 1,60 x 22,23", "1", "50"],
+      ["TXCP1801.6", "180,0 x 1,60 x 22,23", "1", "25"],
+      ["TXCP2302.0", "230,0 x 2,00 x 22,23", "1", "25"],
+    ],
+  },
+  "DISCOS DE DESBASTE": {
+    headers: ["Código", "Medidas", "U.V."],
+    rows: [
+      ["TXCD1156.0", "115,0 x 6,00 x 22,23", "1"],
+    ],
+    unidadesPorCaja: "25"
+  },
+  "DISCOS FLAP": {
+    headers: ["Código", "Medidas", "U.V."],
+    rows: [
+      ["TXFAI11536", "115 x 22 grano 36", "1"],
+      ["TXFAI11560", "115 x 22 grano 60", "1"],
+      ["TXFAI11580", "115 x 22 grano 80", "1"],
+      ["TXFAI115100", "115 x 22 grano 100", "1"],
+      ["TXFAI115120", "115 x 22 grano 120", "1"],
+    ],
+    unidadesPorCaja: "20"
+  },
+  "DISCOS DIAMANTADOS": {
+    headers: ["Código", "Medidas", "U.V."],
+    rows: [
+      ["TXDD2.07S", "115 x B 20/22.23 T2.0X SH 7mm", "1"],
+      ["TXDD2.47S", "115 x B 20/22.23 T2.4X SH 7mm", "1"],
+      ["TXDD1.85S", "110 x B 16/20 X T 1.8X SH 5mm", "1"],
+    ],
+    unidadesPorCaja: "50"
+  },
   "CADENAS_ACERO_GALVANIZADAS": {
     headers: ["Código", "No", "Peso (Kg)", "U.V."],
     rows: [
@@ -390,6 +434,13 @@ export default function ProductosPage() {
                     </tbody>
                   </table>
                 </div>
+                {tablasData[categoryParam].unidadesPorCaja && categoryParam !== "DISCOS DE CORTE PLANO" && (
+                  <div className="px-6 py-4 bg-[#ECEEEF]/30 border-t border-gray-200">
+                    <p className="text-sm text-[#1B1F23] font-medium">
+                      Unidades por caja: <span className="font-semibold">{tablasData[categoryParam].unidadesPorCaja}</span>
+                    </p>
+                  </div>
+                )}
               </div>
             </div>
           ) : filteredProducts.length > 0 ? (
@@ -441,19 +492,6 @@ export default function ProductosPage() {
               </Button>
             </div>
           )}
-        </div>
-      </section>
-      {/* Botón de venta */}
-      <section className="py-12 bg-[#ECEEEF]">
-        <div className="container mx-auto px-4 text-center">
-          <Link href="/#contacto">
-            <Button
-              size="lg"
-              className="bg-[#2C3E50] cursor-pointer hover:bg-[#3A506B] text-white px-8 py-6 text-lg font-semibold rounded-md transition-all duration-200 shadow-lg hover:shadow-xl"
-            >
-              ¡Quiero vender estos productos!
-            </Button>
-          </Link>
         </div>
       </section>
       {/* Footer */}
@@ -518,6 +556,16 @@ export default function ProductosPage() {
           </div>
         </div>
       </footer>
+      {/* Botón fijo "Quiero vender estos productos" */}
+      <Link
+        href="/#contacto"
+        className="fixed bottom-6 left-6 z-50 bg-[#2C3E50] hover:bg-[#3A506B] text-white rounded-full px-6 py-4 shadow-lg hover:shadow-xl flex items-center gap-2 cursor-pointer transition-all duration-200 font-semibold text-sm md:text-base"
+        aria-label="Quiero vender estos productos"
+      >
+        <Handshake className="w-5 h-5 md:w-6 md:h-6" />
+        <span className="hidden sm:inline">¡Quiero vender estos productos!</span>
+        <span className="sm:hidden">Vender</span>
+      </Link>
       {/* WhatsApp Floating Button */}
       <a
         href="https://wa.me/5493515574449"
