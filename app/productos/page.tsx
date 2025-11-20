@@ -10,23 +10,23 @@ import productosData from "@/data/productos-data"
 import Image from "next/image"
 
 const discosCategories = [
-  { name: "Para máquina sensitiva", image: "/imagenes/DiscosCard.png", categoryId: "DISCOS DE CORTE PARA MÁQUINA SENSITIVA" },
-  { name: "De corte", image: "/imagenes/DiscosCard.png", categoryId: "DISCOS DE CORTE PLANO" },
-  { name: "Desbaste", image: "/imagenes/DiscosCard.png", categoryId: "DISCOS DE DESBASTE" },
-  { name: "Flap", image: "/imagenes/DiscosCard.png", categoryId: "DISCOS FLAP" },
-  { name: "Diamantados", image: "/imagenes/DiscosCard.png", categoryId: "DISCOS DIAMANTADOS" },
+  { name: "Para máquina sensitiva", image: "/imagenes/DiscosCard.png", categoryId: "discos de corte para máquina sensitiva" },
+  { name: "De corte", image: "/imagenes/DiscosCard.png", categoryId: "discos de corte plano" },
+  { name: "Desbaste", image: "/imagenes/DiscosCard.png", categoryId: "discos de desbaste" },
+  { name: "Flap", image: "/imagenes/DiscosCard.png", categoryId: "discos flap" },
+  { name: "Diamantados", image: "/imagenes/DiscosCard.png", categoryId: "discos diamantados" },
 ]
 
 const cadenasCablesAccesoriosCategories = [
-  { name: "Cadenas de acero galvanizadas", image: "/imagenes/Cadena.png", categoryId: "CADENAS_ACERO_GALVANIZADAS" },
-  { name: "Cables de acero galvanizados", image: "/imagenes/Cables.png", categoryId: "CABLES_ACERO_GALVANIZADOS" },
-  { name: "Gancho de elevación de ojo con pestillo", image: "/imagenes/Gancho.png", categoryId: "GANCHO_ELEVACION_OJO_PESTILLO" },
-  { name: "Prensacables", image: "/imagenes/Prensacables.png", categoryId: "PRENSACABLES" },
-  { name: "Tensores de ojo-gancho galvanizados", image: "/imagenes/Tensor.png", categoryId: "TENSORES_OJO_GANCHO" },
+  { name: "Cadenas de acero", fullName: "Cadenas de acero galvanizadas", image: "/imagenes/Cadena.png", categoryId: "cadenas_acero_galvanizadas" },
+  { name: "Cables de acero", fullName: "Cables de acero galvanizados", image: "/imagenes/Cables.png", categoryId: "cables_acero_galvanizados" },
+  { name: "Ganchos de elevación", fullName: "Gancho de elevación de ojo-gancho galvanizados", image: "/imagenes/Gancho.png", categoryId: "gancho_elevacion_ojo_pestillo" },
+  { name: "Prensacables", fullName: "Prensacables", image: "/imagenes/Prensacables.png", categoryId: "prensacables" },
+  { name: "Tensores de ojo-gancho", fullName: "Tensores de ojo-gancho galvanizados", image: "/imagenes/Tensor.png", categoryId: "tensores_ojo_gancho" },
 ]
 
 const tablasData: Record<string, { headers: string[], rows: string[][], unidadesPorCaja?: string }> = {
-  "DISCOS DE CORTE PARA MÁQUINA SENSITIVA": {
+  "discos de corte para máquina sensitiva": {
     headers: ["Código", "Medidas", "U.V."],
     rows: [
       ["TXCF3553.0", "355,0 x 3,0 x 25,4", "1"],
@@ -34,7 +34,7 @@ const tablasData: Record<string, { headers: string[], rows: string[][], unidades
     ],
     unidadesPorCaja: "25"
   },
-  "DISCOS DE CORTE PLANO": {
+  "discos de corte plano": {
     headers: ["Código", "Medidas", "U.V.", "Unidades por caja"],
     rows: [
       ["TXCP1151.0", "115,0 X 1,0 X 22,23", "1", "50"],
@@ -43,14 +43,14 @@ const tablasData: Record<string, { headers: string[], rows: string[][], unidades
       ["TXCP2302.0", "230,0 x 2,00 x 22,23", "1", "25"],
     ],
   },
-  "DISCOS DE DESBASTE": {
+  "discos de desbaste": {
     headers: ["Código", "Medidas", "U.V."],
     rows: [
       ["TXCD1156.0", "115,0 x 6,00 x 22,23", "1"],
     ],
     unidadesPorCaja: "25"
   },
-  "DISCOS FLAP": {
+  "discos flap": {
     headers: ["Código", "Medidas", "U.V."],
     rows: [
       ["TXFAI11536", "115 x 22 grano 36", "1"],
@@ -61,7 +61,7 @@ const tablasData: Record<string, { headers: string[], rows: string[][], unidades
     ],
     unidadesPorCaja: "20"
   },
-  "DISCOS DIAMANTADOS": {
+  "discos diamantados": {
     headers: ["Código", "Medidas", "U.V."],
     rows: [
       ["TXDD2.07S", "115 x B 20/22.23 T2.0X SH 7mm", "1"],
@@ -70,7 +70,7 @@ const tablasData: Record<string, { headers: string[], rows: string[][], unidades
     ],
     unidadesPorCaja: "50"
   },
-  "CADENAS_ACERO_GALVANIZADAS": {
+  "cadenas_acero_galvanizadas": {
     headers: ["Código", "No", "Peso (Kg)", "U.V."],
     rows: [
       ["TXC20", "20", "12,50", "1"],
@@ -87,7 +87,7 @@ const tablasData: Record<string, { headers: string[], rows: string[][], unidades
       ["TXC110", "110", "25,00", "1"],
     ]
   },
-  "CABLES_ACERO_GALVANIZADOS": {
+  "cables_acero_galvanizados": {
     headers: ["Código", "Diámetro (mm)", "Construcción", "Longitud (Metros)", "U.V."],
     rows: [
       ["TXCG1.6", "1,6", "6x7", "100", "1"],
@@ -104,7 +104,7 @@ const tablasData: Record<string, { headers: string[], rows: string[][], unidades
       ["TXCG12", "12", "6x19", "100", "1"],
     ]
   },
-  "GANCHO_ELEVACION_OJO_PESTILLO": {
+  "gancho_elevacion_ojo_pestillo": {
     headers: ["Código", "Capacidad (Tn)", "U.V."],
     rows: [
       ["TXGEOR12", "1/2", "1"],
@@ -113,7 +113,7 @@ const tablasData: Record<string, { headers: string[], rows: string[][], unidades
       ["TXGEOR112", "1-1/2", "1"],
     ]
   },
-  "PRENSACABLES": {
+  "prensacables": {
     headers: ["Código", "Medida (mm)", "U.V."],
     rows: [
       ["TXP3", "3", "1"],
@@ -129,7 +129,7 @@ const tablasData: Record<string, { headers: string[], rows: string[][], unidades
       ["TXP26", "26", "1"],
     ]
   },
-  "TENSORES_OJO_GANCHO": {
+  "tensores_ojo_gancho": {
     headers: ["Código", "Medida (mm)", "U.V."],
     rows: [
       ["TXTOG6", "6", "1"],
@@ -215,7 +215,7 @@ export default function ProductosPage() {
             <h1 className="text-4xl md:text-5xl font-bold text-balance">
               {categoryParam
                 ? discosCategories.find(c => c.categoryId === categoryParam)?.name || 
-                  cadenasCablesAccesoriosCategories.find(c => c.categoryId === categoryParam)?.name || 
+                  (cadenasCablesAccesoriosCategories.find(c => c.categoryId === categoryParam)?.fullName || cadenasCablesAccesoriosCategories.find(c => c.categoryId === categoryParam)?.name) || 
                   categoryParam
                 : typeParam === "discos"
                   ? "Discos"
@@ -227,7 +227,7 @@ export default function ProductosPage() {
             <p className="text-lg text-white/90 max-w-2xl leading-relaxed">
               {categoryParam
                 ? `Productos de ${discosCategories.find(c => c.categoryId === categoryParam)?.name || 
-                    cadenasCablesAccesoriosCategories.find(c => c.categoryId === categoryParam)?.name || 
+                    (cadenasCablesAccesoriosCategories.find(c => c.categoryId === categoryParam)?.fullName || cadenasCablesAccesoriosCategories.find(c => c.categoryId === categoryParam)?.name) || 
                     categoryParam}`
                 : typeParam === "discos"
                   ? "Selecciona una categoría para ver los productos"
@@ -314,7 +314,7 @@ export default function ProductosPage() {
           ) : typeParam === "cadenas-cables-accesorios" ? (
             <div className="grid gap-6 grid-cols-1 md:grid-cols-3 max-w-5xl mx-auto">
               {cadenasCablesAccesoriosCategories.map((categoria, index) => (
-                <Card key={index} className="group overflow-hidden rounded-xl border border-border bg-white shadow-sm transition-all hover:shadow-lg">
+                <Card key={index} className="group overflow-hidden rounded-xl border border-border bg-white shadow-sm transition-all hover:shadow-lg" title={categoria.fullName || categoria.name}>
                   <div className="relative aspect-4/3">
                     <Image
                       src={categoria.image}
@@ -324,12 +324,12 @@ export default function ProductosPage() {
                     />
                     <div className="absolute inset-0 flex items-center justify-center p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out">
                       <ul className="text-sm text-muted-foreground leading-relaxed space-y-1 text-center">
-                        <li>• {categoria.name}</li>
+                        <li>• {categoria.fullName || categoria.name}</li>
                       </ul>
                     </div>
                   </div>
                   <CardContent className="flex flex-col gap-3 p-6">
-                    <h3 className="text-base font-semibold text-foreground text-center">{categoria.name}</h3>
+                    <h3 className="text-base font-semibold text-foreground text-center" title={categoria.fullName || categoria.name}>{categoria.name}</h3>
                     <Link href={`/productos?category=${encodeURIComponent(categoria.categoryId)}`} className="w-full mt-auto">
                       <Button variant="outline" className="w-full border-[#2C3E50] text-[#2C3E50] hover:bg-[#2C3E50] hover:text-white font-medium transition-all cursor-pointer">
                         Ver más
@@ -379,7 +379,7 @@ export default function ProductosPage() {
                 <h2 className="text-2xl md:text-3xl font-bold mb-6 text-foreground text-center">Cadenas, Cables y Accesorios</h2>
                 <div className="grid gap-6 grid-cols-1 md:grid-cols-3 lg:grid-cols-5 max-w-7xl mx-auto">
                   {cadenasCablesAccesoriosCategories.map((categoria, index) => (
-                    <Card key={index} className="group overflow-hidden rounded-xl border border-border bg-white shadow-sm transition-all hover:shadow-lg">
+                    <Card key={index} className="group overflow-hidden rounded-xl border border-border bg-white shadow-sm transition-all hover:shadow-lg" title={categoria.fullName || categoria.name}>
                       <div className="relative aspect-4/3">
                         <Image
                           src={categoria.image}
@@ -389,12 +389,12 @@ export default function ProductosPage() {
                         />
                         <div className="absolute inset-0 flex items-center justify-center p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out">
                           <ul className="text-sm text-muted-foreground leading-relaxed space-y-1 text-center">
-                            <li>• {categoria.name}</li>
+                            <li>• {categoria.fullName || categoria.name}</li>
                           </ul>
                         </div>
                       </div>
                       <CardContent className="flex flex-col gap-3 p-6">
-                        <h3 className="text-base font-semibold text-foreground text-center">{categoria.name}</h3>
+                        <h3 className="text-base font-semibold text-foreground text-center" title={categoria.fullName || categoria.name}>{categoria.name}</h3>
                         <Link href={`/productos?category=${encodeURIComponent(categoria.categoryId)}`} className="w-full mt-auto">
                           <Button variant="outline" className="w-full border-[#2C3E50] text-[#2C3E50] hover:bg-[#2C3E50] hover:text-white font-medium transition-all cursor-pointer">
                             Ver más
@@ -434,7 +434,7 @@ export default function ProductosPage() {
                     </tbody>
                   </table>
                 </div>
-                {tablasData[categoryParam].unidadesPorCaja && categoryParam !== "DISCOS DE CORTE PLANO" && (
+                {tablasData[categoryParam].unidadesPorCaja && categoryParam !== "discos de corte plano" && (
                   <div className="px-6 py-4 bg-[#ECEEEF]/30 border-t border-gray-200">
                     <p className="text-sm text-[#1B1F23] font-medium">
                       Unidades por caja: <span className="font-semibold">{tablasData[categoryParam].unidadesPorCaja}</span>

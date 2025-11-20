@@ -4,7 +4,7 @@ const productosData = [
     name: "TXCF3553.0",
     descripcion: "Medidas: 355,0 x 3,0 x 25,4",
     image: "/imagenes/DiscosCard.png",
-    category: "DISCOS DE CORTE PARA MÁQUINA SENSITIVA",
+    category: "discos de corte para máquina sensitiva",
     unidades: 25,
   },
   {
@@ -12,7 +12,7 @@ const productosData = [
     name: "TXCF4053.0",
     descripcion: "Medidas: 405,0 x 3,0 x 25,4",
     image: "/imagenes/DiscosCard.png",
-    category: "DISCOS DE CORTE PARA MÁQUINA SENSITIVA",
+    category: "discos de corte para máquina sensitiva",
     unidades: 25,
   },
   {
@@ -20,7 +20,7 @@ const productosData = [
     name: "TXCP1151.0",
     descripcion: "Medidas: 115,0 X 1,0 X 22,23",
     image: "/imagenes/DiscosCard.png",
-    category: "DISCOS DE CORTE PLANO",
+    category: "discos de corte plano",
     unidades: 50,
   },
   {
@@ -28,7 +28,7 @@ const productosData = [
     name: "TXCP1151.6",
     descripcion: "Medidas: 115,0 x 1,60 x 22,23",
     image: "/imagenes/DiscosCard.png",
-    category: "DISCOS DE CORTE PLANO",
+    category: "discos de corte plano",
     unidades: 50,
   },
   {
@@ -36,7 +36,7 @@ const productosData = [
     name: "TXCP1801.6",
     descripcion: "Medidas: 180,0 x 1,60 x 22,23",
     image: "/imagenes/DiscosCard.png",
-    category: "DISCOS DE CORTE PLANO",
+    category: "discos de corte plano",
     unidades: 25,
   },
   {
@@ -44,7 +44,7 @@ const productosData = [
     name: "TXCP2302.0",
     descripcion: "Medidas: 230,0 x 2,00 x 22,23",
     image: "/imagenes/DiscosCard.png",
-    category: "DISCOS DE CORTE PLANO",
+    category: "discos de corte plano",
     unidades: 25,
   },
   {
@@ -52,7 +52,7 @@ const productosData = [
     name: "TXCD1156.0",
     descripcion: "Medidas: 115,0 x 6,00 x 22,23",
     image: "/imagenes/DiscosCard.png",
-    category: "DISCOS DE DESBASTE",
+    category: "discos de desbaste",
     unidades: 25,
   },
   {
@@ -60,7 +60,7 @@ const productosData = [
     name: "TXFAI11536",
     descripcion: "Medidas: 115 x 22 grano 36",
     image: "/imagenes/DiscosCard.png",
-    category: "DISCOS FLAP",
+    category: "discos flap",
     unidades: 20,
   },
   {
@@ -68,7 +68,7 @@ const productosData = [
     name: "TXFAI11560",
     descripcion: "Medidas: 115 x 22 grano 60",
     image: "/imagenes/DiscosCard.png",
-    category: "DISCOS FLAP",
+    category: "discos flap",
     unidades: 20,
   },
   {
@@ -76,7 +76,7 @@ const productosData = [
     name: "TXFAI11580",
     descripcion: "Medidas: 115 x 22 grano 80",
     image: "/imagenes/DiscosCard.png",
-    category: "DISCOS FLAP",
+    category: "discos flap",
     unidades: 20,
   },
   {
@@ -84,7 +84,7 @@ const productosData = [
     name: "TXFAI115100",
     descripcion: "Medidas: 115 x 22 grano 100",
     image: "/imagenes/DiscosCard.png",
-    category: "DISCOS FLAP",
+    category: "discos flap",
     unidades: 20,
   },
   {
@@ -92,7 +92,7 @@ const productosData = [
     name: "TXFAI115120",
     descripcion: "Medidas: 115 x 22 grano 120",
     image: "/imagenes/DiscosCard.png",
-    category: "DISCOS FLAP",
+    category: "discos flap",
     unidades: 20,
   },
   {
@@ -100,7 +100,7 @@ const productosData = [
     name: "TXDD2.07S",
     descripcion: "Medidas: 115 x B 20/22.23 T2.0X SH 7mm",
     image: "/imagenes/DiscosCard.png",
-    category: "DISCOS DIAMANTADOS",
+    category: "discos diamantados",
     unidades: 50,
   },
   {
@@ -108,7 +108,7 @@ const productosData = [
     name: "TXDD2.47S",
     descripcion: "Medidas: 115 x B 20/22.23 T2.4X SH 7mm",
     image: "/imagenes/DiscosCard.png",
-    category: "DISCOS DIAMANTADOS",
+    category: "discos diamantados",
     unidades: 50,
   },
   {
@@ -116,7 +116,7 @@ const productosData = [
     name: "TXDD1.85S",
     descripcion: "Medidas: 110 x B 16/20 X T 1.8X SH 5mm",
     image: "/imagenes/DiscosCard.png",
-    category: "DISCOS DIAMANTADOS",
+    category: "discos diamantados",
     unidades: 50,
   },
 ]

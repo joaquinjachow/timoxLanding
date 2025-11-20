@@ -138,7 +138,7 @@ export default function HomePage() {
                   <ul className="text-sm text-muted-foreground leading-relaxed space-y-1">
                     <li>• Cadenas de acero galvanizadas</li>
                     <li>• Cables de acero galvanizados</li>
-                    <li>• Gancho de elevación de ojo con pestillo</li>
+                    <li>• Gancho de elevación de ojo-gancho galvanizados</li>
                     <li>• Prensacables</li>
                     <li>• Tensores de ojo-gancho galvanizados</li>
                   </ul>
