@@ -140,7 +140,7 @@ export default function HomePage() {
                     <li>• Cables de acero galvanizados</li>
                     <li>• Gancho de elevación de ojo-gancho galvanizados</li>
                     <li>• Prensacables</li>
-                    <li>• Tensores de ojo-gancho galvanizados</li>
+                    <li>• Tensores</li>
                   </ul>
                 </div>
               </div>

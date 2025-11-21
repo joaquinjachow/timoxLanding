@@ -22,7 +22,7 @@ const cadenasCablesAccesoriosCategories = [
   { name: "Cables de acero", fullName: "Cables de acero galvanizados", image: "/imagenes/Cables.png", categoryId: "cables_acero_galvanizados" },
   { name: "Ganchos de elevación", fullName: "Gancho de elevación de ojo-gancho galvanizados", image: "/imagenes/Gancho.png", categoryId: "gancho_elevacion_ojo_pestillo" },
   { name: "Prensacables", fullName: "Prensacables", image: "/imagenes/Prensacables.png", categoryId: "prensacables" },
-  { name: "Tensores de ojo-gancho", fullName: "Tensores de ojo-gancho galvanizados", image: "/imagenes/Tensor.png", categoryId: "tensores_ojo_gancho" },
+  { name: "Tensores", fullName: "Tensores de ojo-gancho galvanizados", image: "/imagenes/Tensor.png", categoryId: "tensores_ojo_gancho" },
 ]
 
 const tablasData: Record<string, { headers: string[], rows: string[][], unidadesPorCaja?: string }> = {
