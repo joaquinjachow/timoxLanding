@@ -1,11 +1,10 @@
 "use client"
-import { useState, useMemo } from "react"
+import { useMemo } from "react"
 import Link from "next/link"
 import { useSearchParams } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Search, Filter, ArrowRight, ArrowLeft, Handshake } from "lucide-react"
+import { Search, ArrowRight, ArrowLeft, Handshake } from "lucide-react"
 import productosData from "@/data/productos-data"
 import Image from "next/image"
 
@@ -143,23 +142,13 @@ export default function ProductosPage() {
   const searchParams = useSearchParams()
   const typeParam = searchParams.get("type")
   const categoryParam = searchParams.get("category")
-  const [searchQuery, setSearchQuery] = useState("")
-  const [selectedCategory, setSelectedCategory] = useState<string>("all")
-  const categories = useMemo(() => {
-    const cats = Array.from(new Set(productosData.map((p) => p.category)))
-    return ["all", ...cats]
-  }, [])
   const filteredProducts = useMemo(() => {
-    const categoryFilter = categoryParam || (selectedCategory === "all" ? null : selectedCategory)
+    const categoryFilter = categoryParam || null
     return productosData.filter((producto) => {
-      const matchesSearch =
-        producto.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        producto.descripcion.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        producto.category.toLowerCase().includes(searchQuery.toLowerCase())
       const matchesCategory = !categoryFilter || producto.category === categoryFilter
-      return matchesSearch && matchesCategory
+      return matchesCategory
     })
-  }, [searchQuery, selectedCategory, categoryParam])
+  }, [categoryParam])
 
   return (
     <div className="min-h-screen bg-background">
@@ -237,48 +226,6 @@ export default function ProductosPage() {
             </p>
         </div>
       </section>
-      {/* Filters and Search - Solo se muestra cuando hay productos individuales, no cuando hay cards */}
-      {false && !typeParam && !categoryParam ? (
-        <section className="py-8 bg-muted/30 border-b">
-          <div className="container mx-auto px-4">
-            <div className="flex flex-col md:flex-row gap-4 items-start md:items-center justify-between">
-              {/* Search Bar */}
-              <div className="relative w-full md:w-96">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
-                <Input
-                  type="text"
-                  placeholder="Buscar productos..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-10 h-11"
-                />
-              </div>
-              {/* Category Filters */}
-              <div className="flex items-center gap-2 flex-wrap">
-                <Filter className="h-5 w-5 text-muted-foreground" />
-                {categories.map((category) => (
-                  <Button
-                    key={category}
-                    variant={selectedCategory === category ? "default" : "outline"}
-                    size="sm"
-                    onClick={() => setSelectedCategory(category)}
-                    className={selectedCategory === category ? "bg-[#2C3E50] hover:bg-[#3A506B]" : ""}
-                  >
-                    {category === "all" ? "Todos" : category}
-                  </Button>
-                ))}
-              </div>
-            </div>
-            {/* Results Count */}
-            <div className="mt-4">
-              <p className="text-sm text-muted-foreground">
-                Mostrando <span className="font-semibold text-foreground">{filteredProducts.length}</span> de{" "}
-                <span className="font-semibold text-foreground">{productosData.length}</span> productos
-              </p>
-            </div>
-          </div>
-        </section>
-      ) : null}
       {/* Products Grid */}
       <section className="py-12">
         <div className="container mx-auto px-4">
@@ -481,13 +428,7 @@ export default function ProductosPage() {
               </div>
               <h3 className="text-xl font-bold mb-2">No se encontraron productos</h3>
               <p className="text-muted-foreground mb-6">Intenta con otros términos de búsqueda o filtros</p>
-              <Button
-                onClick={() => {
-                  setSearchQuery("")
-                  setSelectedCategory("all")
-                }}
-                variant="outline"
-              >
+              <Button variant="outline">
                 Limpiar Filtros
               </Button>
             </div>
