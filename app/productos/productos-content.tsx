@@ -15,6 +15,53 @@ import productosData from "@/data/productos-data"
 import { tablasData } from "@/data/tablas-data"
 import { getCategoryDisplayName } from "@/lib/productos-utils"
 
+type CategoryCardProps = {
+  category: {
+    name: string
+    fullName?: string
+    image: string
+    categoryId: string
+  }
+  showFullName?: boolean
+}
+
+function CategoryCard({ category, showFullName = false }: CategoryCardProps) {
+  const displayName = showFullName ? category.fullName || category.name : category.name
+  const title = showFullName ? displayName : undefined
+
+  return (
+    <Card
+      className="group overflow-hidden rounded-xl border border-border bg-white shadow-sm transition-all hover:shadow-lg"
+      title={title}
+    >
+      <div className="relative aspect-4/3">
+        <Image
+          src={category.image}
+          alt={category.name}
+          fill
+          className="object-contain opacity-100 group-hover:opacity-0 transition-opacity duration-500 ease-in-out"
+        />
+        <div className="absolute inset-0 flex items-center justify-center p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out">
+          <ul className="text-sm text-muted-foreground leading-relaxed space-y-1 text-center">
+            <li>• {displayName}</li>
+          </ul>
+        </div>
+      </div>
+      <CardContent className="flex flex-col gap-3 p-6">
+        <h3 className="text-base font-semibold text-foreground text-center" title={title}>
+          {category.name}
+        </h3>
+        <Link href={`/productos?category=${encodeURIComponent(category.categoryId)}`} className="w-full mt-auto">
+          <Button variant="outline" className="w-full border-[#2C3E50] text-[#2C3E50] hover:bg-[#2C3E50] hover:text-white font-medium transition-all cursor-pointer">
+            Ver más
+            <ArrowRight className="ml-2 h-4 w-4" />
+          </Button>
+        </Link>
+      </CardContent>
+    </Card>
+  )
+}
+
 export function ProductosContent() {
   const searchParams = useSearchParams()
   const typeParam = searchParams.get("type")
@@ -71,59 +118,13 @@ export function ProductosContent() {
           {typeParam === "discos" ? (
             <div className="grid gap-6 grid-cols-1 md:grid-cols-3 max-w-5xl mx-auto">
               {discosCategories.map((categoria, index) => (
-                <Card key={index} className="group overflow-hidden rounded-xl border border-border bg-white shadow-sm transition-all hover:shadow-lg">
-                  <div className="relative aspect-4/3">
-                    <Image
-                      src={categoria.image}
-                      alt={categoria.name}
-                      fill
-                      className="object-contain opacity-100 group-hover:opacity-0 transition-opacity duration-500 ease-in-out"
-                    />
-                    <div className="absolute inset-0 flex items-center justify-center p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out">
-                      <ul className="text-sm text-muted-foreground leading-relaxed space-y-1 text-center">
-                        <li>• {categoria.name}</li>
-                      </ul>
-                    </div>
-                  </div>
-                  <CardContent className="flex flex-col gap-3 p-6">
-                    <h3 className="text-base font-semibold text-foreground text-center">{categoria.name}</h3>
-                    <Link href={`/productos?category=${encodeURIComponent(categoria.categoryId)}`} className="w-full mt-auto">
-                      <Button variant="outline" className="w-full border-[#2C3E50] text-[#2C3E50] hover:bg-[#2C3E50] hover:text-white font-medium transition-all cursor-pointer">
-                        Ver más
-                        <ArrowRight className="ml-2 h-4 w-4" />
-                      </Button>
-                    </Link>
-                  </CardContent>
-                </Card>
+                <CategoryCard key={index} category={categoria} />
               ))}
             </div>
           ) : typeParam === "cadenas-cables-accesorios" ? (
             <div className="grid gap-6 grid-cols-1 md:grid-cols-3 max-w-5xl mx-auto">
               {cadenasCablesAccesoriosCategories.map((categoria, index) => (
-                <Card key={index} className="group overflow-hidden rounded-xl border border-border bg-white shadow-sm transition-all hover:shadow-lg" title={categoria.fullName || categoria.name}>
-                  <div className="relative aspect-4/3">
-                    <Image
-                      src={categoria.image}
-                      alt={categoria.name}
-                      fill
-                      className="object-contain opacity-100 group-hover:opacity-0 transition-opacity duration-500 ease-in-out"
-                    />
-                    <div className="absolute inset-0 flex items-center justify-center p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out">
-                      <ul className="text-sm text-muted-foreground leading-relaxed space-y-1 text-center">
-                        <li>• {categoria.fullName || categoria.name}</li>
-                      </ul>
-                    </div>
-                  </div>
-                  <CardContent className="flex flex-col gap-3 p-6">
-                    <h3 className="text-base font-semibold text-foreground text-center" title={categoria.fullName || categoria.name}>{categoria.name}</h3>
-                    <Link href={`/productos?category=${encodeURIComponent(categoria.categoryId)}`} className="w-full mt-auto">
-                      <Button variant="outline" className="w-full border-[#2C3E50] text-[#2C3E50] hover:bg-[#2C3E50] hover:text-white font-medium transition-all cursor-pointer">
-                        Ver más
-                        <ArrowRight className="ml-2 h-4 w-4" />
-                      </Button>
-                    </Link>
-                  </CardContent>
-                </Card>
+                <CategoryCard key={index} category={categoria} showFullName />
               ))}
             </div>
           ) : !typeParam && !categoryParam ? (
@@ -132,30 +133,7 @@ export function ProductosContent() {
                 <h2 className="text-2xl md:text-3xl font-bold mb-6 text-foreground text-center">Discos</h2>
                 <div className="grid gap-6 grid-cols-1 md:grid-cols-3 lg:grid-cols-5 max-w-7xl mx-auto">
                   {discosCategories.map((categoria, index) => (
-                    <Card key={index} className="group overflow-hidden rounded-xl border border-border bg-white shadow-sm transition-all hover:shadow-lg">
-                      <div className="relative aspect-4/3">
-                        <Image
-                          src={categoria.image}
-                          alt={categoria.name}
-                          fill
-                          className="object-contain opacity-100 group-hover:opacity-0 transition-opacity duration-500 ease-in-out"
-                        />
-                        <div className="absolute inset-0 flex items-center justify-center p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out">
-                          <ul className="text-sm text-muted-foreground leading-relaxed space-y-1 text-center">
-                            <li>• {categoria.name}</li>
-                          </ul>
-                        </div>
-                      </div>
-                      <CardContent className="flex flex-col gap-3 p-6">
-                        <h3 className="text-base font-semibold text-foreground text-center">{categoria.name}</h3>
-                        <Link href={`/productos?category=${encodeURIComponent(categoria.categoryId)}`} className="w-full mt-auto">
-                          <Button variant="outline" className="w-full border-[#2C3E50] text-[#2C3E50] hover:bg-[#2C3E50] hover:text-white font-medium transition-all cursor-pointer">
-                            Ver más
-                            <ArrowRight className="ml-2 h-4 w-4" />
-                          </Button>
-                        </Link>
-                      </CardContent>
-                    </Card>
+                    <CategoryCard key={index} category={categoria} />
                   ))}
                 </div>
               </div>
@@ -163,30 +141,7 @@ export function ProductosContent() {
                 <h2 className="text-2xl md:text-3xl font-bold mb-6 text-foreground text-center">Cadenas, Cables y Accesorios</h2>
                 <div className="grid gap-6 grid-cols-1 md:grid-cols-3 lg:grid-cols-5 max-w-7xl mx-auto">
                   {cadenasCablesAccesoriosCategories.map((categoria, index) => (
-                    <Card key={index} className="group overflow-hidden rounded-xl border border-border bg-white shadow-sm transition-all hover:shadow-lg" title={categoria.fullName || categoria.name}>
-                      <div className="relative aspect-4/3">
-                        <Image
-                          src={categoria.image}
-                          alt={categoria.name}
-                          fill
-                          className="object-contain opacity-100 group-hover:opacity-0 transition-opacity duration-500 ease-in-out"
-                        />
-                        <div className="absolute inset-0 flex items-center justify-center p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out">
-                          <ul className="text-sm text-muted-foreground leading-relaxed space-y-1 text-center">
-                            <li>• {categoria.fullName || categoria.name}</li>
-                          </ul>
-                        </div>
-                      </div>
-                      <CardContent className="flex flex-col gap-3 p-6">
-                        <h3 className="text-base font-semibold text-foreground text-center" title={categoria.fullName || categoria.name}>{categoria.name}</h3>
-                        <Link href={`/productos?category=${encodeURIComponent(categoria.categoryId)}`} className="w-full mt-auto">
-                          <Button variant="outline" className="w-full border-[#2C3E50] text-[#2C3E50] hover:bg-[#2C3E50] hover:text-white font-medium transition-all cursor-pointer">
-                            Ver más
-                            <ArrowRight className="ml-2 h-4 w-4" />
-                          </Button>
-                        </Link>
-                      </CardContent>
-                    </Card>
+                    <CategoryCard key={index} category={categoria} showFullName />
                   ))}
                 </div>
               </div>
